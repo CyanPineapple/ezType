@@ -1,6 +1,12 @@
-alpha = { 'a'..'z' | 'A'..'Z' }
-digit = { '0'..'9' }
+WS = _{ " " }
 
-ident = { !digit ~ (alpha | digit)+ }
+_true = { "true" }
+_false = { "false" }
+boolean = { _true | _false }
 
-ident_list = _{ ident ~ (" " ~ ident)* }
+_and = { "&&" }
+_or = { "||" }
+conn = { _and | _or }
+extra = _{WS* ~ conn ~ WS* ~ boolean}
+
+boolexp = _{ boolean ~ (extra)* }
